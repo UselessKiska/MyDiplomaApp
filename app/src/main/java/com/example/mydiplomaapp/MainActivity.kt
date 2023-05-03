@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
+        //blya
         binding?.apply{
             btnChooseFile.setOnClickListener{
                 val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
