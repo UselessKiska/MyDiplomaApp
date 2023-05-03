@@ -11,4 +11,12 @@ class MainActivity : AppCompatActivity() {
 
         Log.d("First Commit", "First commit from another branch")
     }
+
+    override fun onUserLeaveHint() {
+        super.onUserLeaveHint()
+
+        if(isFinishing)
+            return
+        finishAffinity()
+    }
 }
