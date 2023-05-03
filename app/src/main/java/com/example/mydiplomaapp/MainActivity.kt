@@ -19,4 +19,10 @@ class MainActivity : AppCompatActivity() {
             return
         finishAffinity()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        Log.d("onDestroy", "App Destroyed")
+    }
 }
