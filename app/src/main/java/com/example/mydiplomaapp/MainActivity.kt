@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
                     cursor.close()
                 }
                 chosenFile = File(cacheDir, fileName)
+                binding?.fileName?.text = chosenFile?.name
                 try {
                     FileInputStream(descriptor.fileDescriptor).use { inputStream ->
                         FileOutputStream(chosenFile).use { outputStream ->
@@ -62,7 +63,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-        //blya
         binding?.apply{
             btnChooseFile.setOnClickListener{
                 val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
