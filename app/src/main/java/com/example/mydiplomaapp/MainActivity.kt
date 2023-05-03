@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     private var extension:String = ""
 
-    private val filePickerLauncher2 = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+    private val filePickerLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         uri?.let {
             contentResolver.openFileDescriptor(uri, "r")?.use { descriptor ->
                 var fileName = ""
@@ -62,14 +62,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-        //blya
+
         binding?.apply{
             btnChooseFile.setOnClickListener{
                 val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
                     type = "*/*"
                     addCategory(Intent.CATEGORY_OPENABLE)
                 }
-                filePickerLauncher2?.launch(intent.type)
+                filePickerLauncher?.launch(intent.type)
             }
             btnEncrypt.setOnClickListener {
                 if(chosenFile!=null) {
@@ -136,7 +136,8 @@ class MainActivity : AppCompatActivity() {
 
 //    override fun onUserLeaveHint() {
 //        super.onUserLeaveHint()
-//
+//пытался сделать так чтобы приложение закрывалось если уходит на бэкграунд для безопасности
+// но это не позволяет пользоваться файл пикером
 //        if(isFinishing)
 //            return
 //        finishAffinity()
