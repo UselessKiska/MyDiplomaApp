@@ -90,6 +90,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun generateSecretKey() {
+        // Generate AES key 256bit
         val keyGenerator = KeyGenerator.getInstance("AES")
         keyGenerator.init(256)
         secretKey = keyGenerator.generateKey()
