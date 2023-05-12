@@ -16,14 +16,23 @@ class FirstPageActivity : AppCompatActivity() {
 
     private var binding:ActivityFirstPageBinding? = null
 
+    var text:String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFirstPageBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
         myPreferences = getSharedPreferences(Const.PREFERENCE_NAME, Context.MODE_PRIVATE)
 
         editor = myPreferences?.edit()
+
+
+        var info = intent.extras
+        if(info!=null){
+            text = info.getString(Const.PREFERENCE_CODE)
+            Log.d("CheckingAdd", text.toString())
+        }
+
 
     }
 
@@ -44,7 +53,17 @@ class FirstPageActivity : AppCompatActivity() {
                         binding?.fourthPlace?.text.toString()
 
                 if(newCode.toInt() == code){
-                    enterTheApp()
+                    if(text.isNullOrEmpty())
+                        enterTheApp()
+                    else{
+                        val intent = Intent(this, PinCodeActivity::class.java)
+                        intent.putExtra("Required", true)
+                        editor?.putBoolean(Const.IS_CODE_REQUIRED, true)
+                        editor?.apply()
+                        startActivity(intent)
+                        finish()
+                    }
+
                 }
                 else
                     Snackbar.make(it, "Wrong code code is $code",Snackbar.LENGTH_SHORT ).show()
