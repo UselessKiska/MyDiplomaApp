@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.OpenableColumns
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.webkit.MimeTypeMap
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -143,4 +145,19 @@ class MainActivity : AppCompatActivity() {
 //            return
 //        finishAffinity()
 //    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.app_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when(id){
+            R.id.pin_menu_button->{
+                startActivity(Intent(this,PinCodeActivity::class.java))
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
 }
