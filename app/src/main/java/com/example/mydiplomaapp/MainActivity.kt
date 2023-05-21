@@ -161,8 +161,7 @@ class MainActivity : AppCompatActivity() {
 
                 val builder = AlertDialog.Builder(this)
 
-                builder.setTitle("Input Dialog")
-                    .setMessage("Please enter password:")
+                builder.setTitle("Enter password")
 
                 val inputEditText = EditText(this)
                 builder.setView(inputEditText)
@@ -230,8 +229,7 @@ class MainActivity : AppCompatActivity() {
     private fun setBuilder(file: File){
         val builder = AlertDialog.Builder(this)
 
-        builder.setTitle("Input Dialog")
-            .setMessage("Please password:")
+        builder.setTitle("Enter password")
 
         val inputEditText = EditText(this)
         builder.setView(inputEditText)
