@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     private var viewModel:MainViewModel? = null
     private var extension:String = ""
 
-    private val filePickerLauncher2 = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+    private val filePickerLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         uri?.let {
             chosenFilePath = uri.path
             contentResolver.openFileDescriptor(uri, "r")?.use { descriptor ->
@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 chosenFile = File(getExternalFilesDir(null), fileName)
                 binding?.fileName?.text = chosenFile?.name
+
                 try {
                     FileInputStream(descriptor.fileDescriptor).use { inputStream ->
                         FileOutputStream(chosenFile).use { outputStream ->
@@ -93,7 +94,7 @@ class MainActivity : AppCompatActivity() {
                     type = "*/*"
                     addCategory(Intent.CATEGORY_OPENABLE)
                 }
-                filePickerLauncher2?.launch(intent.type)
+                filePickerLauncher?.launch(intent.type)
             }
 
             btnEncrypt.setOnClickListener {
@@ -117,6 +118,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun generateSecretKey() {
+        // Generate AES key 256bit
         val keyGenerator = KeyGenerator.getInstance("AES")
         keyGenerator.init(256)
         secretKey = keyGenerator.generateKey()
@@ -209,7 +211,6 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(binding?.root?.rootView!!, "Wrong password", Snackbar.LENGTH_SHORT).show()
         }
     }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.app_menu, menu)
         return true
