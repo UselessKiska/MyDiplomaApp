@@ -36,21 +36,6 @@ class PinCodeActivity : AppCompatActivity() {
         val isRequired = myPreferences?.getBoolean(Const.IS_CODE_REQUIRED, false)
 
         Log.d(Const.IS_CODE_REQUIRED,isRequired.toString())
-//
-//        if(isCodeSaved!! && !isRequired!!){
-//            if(intent.extras!=null) {
-//                isChecked = intent.extras?.getBoolean("Required")
-//                setValues()
-//            }
-//            else{
-//                val intent = Intent(this, FirstPageActivity::class.java)
-//                intent.putExtra(Const.PREFERENCE_CODE, "exists")
-//                startActivity(intent)
-//            }
-//        }
-//        else {
-//            setValues()
-//        }
 
         setValues()
     }
