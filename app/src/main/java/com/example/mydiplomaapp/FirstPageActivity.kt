@@ -5,7 +5,10 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.inputmethod.EditorInfo
 import com.example.mydiplomaapp.databinding.ActivityFirstPageBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -40,6 +43,46 @@ class FirstPageActivity : AppCompatActivity() {
         super.onResume()
 
         val isCodeSaved = myPreferences?.getBoolean(Const.IS_PREFERENCE_CODE_SAVED, false)
+
+        binding?.firstPlace?.addTextChangedListener(object:TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                binding?.secondPlace?.requestFocus()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+        binding?.secondPlace?.addTextChangedListener(object:TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                binding?.thirdPlace?.requestFocus()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+        binding?.thirdPlace?.addTextChangedListener(object:TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                binding?.fourthPlace?.requestFocus()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
 
         if(isCodeSaved!!){
             val code = myPreferences?.getInt(Const.PREFERENCE_CODE, 0)
